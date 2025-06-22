@@ -39,8 +39,8 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'ES', 'FR', 'MX'],
       },
-      success_url: `${process.env.CLIENT_URL}/success`,
-      cancel_url: `${process.env.CLIENT_URL}/cancel`,
+      success_url: `${process.env.CLIENT_URL}/#/success`,
+      cancel_url: `${process.env.CLIENT_URL}/#/cancel`,
     });
 
     res.json({ url: session.url });

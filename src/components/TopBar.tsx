@@ -22,7 +22,13 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
     'Style meets simplicity.',
     'Shop smarter, live better.',
     'Quality you can trust.',
-    'Just the right price.'
+    'Just the right price.',
+    'Because you deserve better.',
+    'Limited drops. Unlimited style.',
+    'Trending now, gone tomorrow.',
+    'Don’t miss what’s meant for you.',
+    'Where quality meets culture.',
+    'Your next favorite thing.',
   ];
 
   const randomPhrase = React.useMemo(() => {
