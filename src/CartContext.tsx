@@ -35,6 +35,29 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [orders, setOrders] = useState<CartItem[]>(() => {
+    const saved = localStorage.getItem('orders');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const addOrder = (items: CartItem[]) => {
+    const existing = localStorage.getItem('orders');
+    const parsed = existing ? JSON.parse(existing) : [];
+    const combined = [...parsed, ...items];
+    localStorage.setItem('orders', JSON.stringify(combined));
+    setOrders(combined);
+  };
+
+  const changeQuantity = (productId: number, amount: number) => {
+    setCart(prev =>
+      prev.map(item =>
+        item.id === productId
+          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : item
+      )
+    );
+  };
+  
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
@@ -70,7 +93,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{
+      cart,
+      addToCart,
+      removeFromCart,
+      clearCart,
+      addOrder, // ✅ nuevo
+      orders ,    // ✅ nuevo
+      changeQuantity,
+    }}>
       {children}
     </CartContext.Provider>
   );

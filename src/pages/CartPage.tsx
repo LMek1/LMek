@@ -11,7 +11,7 @@ const CartPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cartItems: cart }),
       });
-      
+
       const data = await response.json();
 
       if (data.url) {
@@ -24,19 +24,9 @@ const CartPage = () => {
     }
   };
 
-  const { cart, removeFromCart, clearCart, addToCart } = useCart();
+  const { cart, removeFromCart, clearCart, addToCart, changeQuantity } = useCart();
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  const decreaseQuantity = (id: number) => {
-    const item = cart.find(p => p.id === id);
-    if (item && item.quantity > 1) {
-      removeFromCart(id);
-      addToCart({ ...item, quantity: item.quantity - 1 });
-    } else {
-      removeFromCart(id);
-    }
-  };
 
   return (
     <main className="p-6 text-white flex flex-col h-[calc(100vh-96px)]">
@@ -62,24 +52,26 @@ const CartPage = () => {
                 {cart.map((item) => (
                   <tr key={item.id} className="border-b border-gray-800">
                     <td className="p-4">
-                      <img src={item.image} alt={item.name} className="w-16 h-16 rounded object-cover" />
+                      <img src={item.image || item.images} alt={item.name} className="w-16 h-16 rounded object-cover" />
                     </td>
                     <td>{item.name}</td>
                     <td>${item.price.toFixed(2)}</td>
-                    <td className="flex items-center gap-2 py-4">
+                    <td className="py-4">
+                      <div className="flex items-center gap-2">
                       <button
-                        onClick={() => decreaseQuantity(item.id)}
+                        onClick={() => changeQuantity(item.id, -1)}
                         className="text-gray-300 hover:text-red-400 p-1"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
                       <span className="px-2">{item.quantity}</span>
                       <button
-                        onClick={() => addToCart(item)}
+                        onClick={() => changeQuantity(item.id, 1)}
                         className="text-gray-300 hover:text-green-400 p-1"
                       >
                         <Plus className="w-4 h-4" />
                       </button>
+                      </div>
                     </td>
                     <td>${(item.price * item.quantity).toFixed(2)}</td>
                     <td>

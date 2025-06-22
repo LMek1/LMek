@@ -15,6 +15,7 @@ import { HashRouter } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import FAQsPage from './pages/FAQsPage';
+import CancelPage from './pages/CancelPage'; // ⬅️ Importar
 
 
 
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
           <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
           <Route path="/faqs" element={<Layout><FAQsPage /></Layout>} />
+          <Route path="/cancel" element={<Layout><CancelPage /></Layout>} />
         </Routes>
      </HashRouter>
     </CartProvider>

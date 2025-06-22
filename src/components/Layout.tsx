@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen flex flex-col bg-gray-950">
       <Sidebar isOpen={isSidebarOpen} />
       {isSidebarOpen && (
         <div

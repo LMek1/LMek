@@ -7,11 +7,12 @@ export default function SearchResultsPage() {
   const query = params.get('q')?.toLowerCase() || '';
 
   const exactMatches = products.filter(p =>
-    p.name.toLowerCase() === query
+    p.name.toLowerCase() === query || p.id.toString() === query
   );
 
   const partialMatches = products.filter(p =>
-    p.name.toLowerCase().includes(query) && !exactMatches.includes(p)
+    (p.name.toLowerCase().includes(query) || p.id.toString().includes(query)) &&
+    !exactMatches.includes(p)
   );
 
   return (

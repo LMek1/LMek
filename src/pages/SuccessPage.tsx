@@ -6,12 +6,12 @@ import { Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SuccessPage = () => {
-  const { clearCart } = useCart();
+  const { clearCart, cart, addOrder } = useCart();
   const navigate = useNavigate();
 
   useEffect(() => {
     clearCart();
-
+    addOrder(cart);
     // Opcional: redirigir automáticamente después de unos segundos
     const timeout = setTimeout(() => {
       navigate('/');
