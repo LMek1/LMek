@@ -27,26 +27,27 @@ const TrackPage = () => {
       {cart.length === 0 ? (
         <p className="text-gray-400 mt-10">You have no orders to track.</p>
       ) : (
-        <div className="space-y-6">
-          {cart.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center gap-6 border border-gray-800 p-4 rounded-lg"
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-20 h-20 object-cover rounded"
-              />
-              <div>
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-sm text-gray-400">Ordered on: {formatDate(item.addedAt)}</p>
-                <p className="text-sm text-green-400 font-medium">
-                  Estimated Delivery: {deliveryDate(item.addedAt, item.estimatedDeliveryDays)}
-                </p>
+        <div className="flex flex-col min-h-[70vh]">
+          <div className="space-y-6">
+            {cart.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center gap-6 border border-gray-800 p-4 rounded-lg"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-20 h-20 object-cover rounded"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold">{item.name}</h3>
+                  <p className="text-sm text-green-400 font-medium">Ordered on: {formatDate(item.addedAt)}</p>
+                  <p className="text-sm text-green-400 font-medium">
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </main>

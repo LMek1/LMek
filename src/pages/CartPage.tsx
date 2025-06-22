@@ -1,15 +1,17 @@
 import { useCart } from '../CartContext';
 import { Minus, Plus } from 'lucide-react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const CartPage = () => {
   const handleCheckout = async () => {
     try {
-      const response = await fetch('http://localhost:4242/create-checkout-session', {
+      const response = await fetch(`${API_BASE_URL}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cartItems: cart }),
       });
-
+      
       const data = await response.json();
 
       if (data.url) {
