@@ -39,7 +39,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'ES', 'FR', 'MX'],
       },
-      success_url: `${process.env.CLIENT_URL}/#/success`,
+      success_url: `${process.env.CLIENT_URL}/#/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.CLIENT_URL}/#/cancel`,
     });
 
@@ -53,5 +53,30 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Error creating checkout session' });
   }
 });
+
+app.post('/verify-checkout', async (req, res) => {
+  const { session_id } = req.body;
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(session_id);
+
+    const country = session.shipping_details?.address?.country;
+
+    if (!country) {
+      return res.status(400).json({ valid: false, reason: 'No country info' });
+    }
+
+    // Ejemplo: solo aceptamos pedidos si el país es MX, ES o FR
+    if (['MX', 'ES', 'FR'].includes(country)) {
+      return res.json({ valid: true, country });
+    } else {
+      return res.status(403).json({ valid: false, reason: 'Unsupported country', country });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ valid: false, reason: 'Server error' });
+  }
+});
+
 
 app.listen(4242, () => console.log('✅ Server running at http://localhost:4242'));

@@ -11,13 +11,26 @@ const SuccessPage = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const sessionId = params.get('session_id');
+    if (!sessionId) return;
 
-    if (!sessionId) return; // ⚠️ Evita guardar si no viene de Stripe
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/verify-checkout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.valid) {
+          addOrder(cart);
+          clearCart();
+        } else {
+          console.warn('Pedido no válido:', data.reason || 'Invalid session');
+        }
+      })
+      .catch(() => {
+        console.warn('Error verificando el pedido');
+      });
 
-    addOrder(cart);
-    clearCart();
-
-    // Redirigir después de 5s
     const timeout = setTimeout(() => {
       navigate('/');
     }, 5000);
