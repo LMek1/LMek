@@ -92,6 +92,9 @@ const CartPage = () => {
             <p className="text-xl font-bold text-green-400 mb-4">
               Total: ${total.toFixed(2)}
             </p>
+            <p className="text-gray-400 text-sm mb-2">
+              Your payment is processed securely with <span className="font-semibold text-white">Stripe</span>. We do not store your card information.
+            </p>
             <button
               onClick={handleCheckout}
               className="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-lg"

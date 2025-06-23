@@ -92,6 +92,54 @@ export const products = [
           FR: 6,
       }
     },
+    {
+      id: 8,
+      name: '"Men’s Classic Quartz Watch',
+      price: 16.99,
+      images: ['https://ae-pic-a1.aliexpress-media.com/kf/He3c270556f404ac7b012eee2ae6a18410.jpg_960x960q75.jpg_.avif'],
+      category: ['bestsellers', 'accessories',],
+      estimatedDeliveryDays: 14,
+      description: 'Add a touch of retro charm and calming ambiance to your space with the Classic Red Lava Lamp. Featuring vibrant red wax swirling in golden liquid, this relaxing lamp is perfect for bedrooms, living rooms, or chill-out spaces. Powered by a 25W R39 bulb, it creates soothing, dynamic motion that brings warmth and nostalgia to any environment. Whether you’re winding down or setting a groovy mood, this iconic piece is both decorative and functional. Ideal for: Nightstands, desks, lounges, or as a unique gift for lava lamp lovers.',
+      extraShippingCost: {
+          MX: 9,
+      }
+    },
+    {
+      id: 9,
+      name: 'LIGE Roulette Watch – Men\'s Fashion Leather Wristwatch with Spinning Dial',
+      price: 14.99,
+      images: ['https://ae-pic-a1.aliexpress-media.com/kf/S1d9548e7e8434061b3ba3acd74f442287.jpg_960x960q75.jpg_.avif'],
+      category: ['bestsellers', 'accessories',],
+      estimatedDeliveryDays: 14,
+      description: 'Add a touch of retro charm and calming ambiance to your space with the Classic Red Lava Lamp. Featuring vibrant red wax swirling in golden liquid, this relaxing lamp is perfect for bedrooms, living rooms, or chill-out spaces. Powered by a 25W R39 bulb, it creates soothing, dynamic motion that brings warmth and nostalgia to any environment. Whether you’re winding down or setting a groovy mood, this iconic piece is both decorative and functional. Ideal for: Nightstands, desks, lounges, or as a unique gift for lava lamp lovers.',
+      extraShippingCost: {
+          US: 8,
+          MX: 2,
+      }
+    },
+    {
+      id: 10,
+      name: 'Demon Claw Y2K Watch',
+      price: 24.99,
+      images: ['https://ae-pic-a1.aliexpress-media.com/kf/S8ad263b402f2470aa9a438e6fdbc7665d.jpg_960x960q75.jpg_.avif'],
+      category: ['bestsellers', 'accessories',],
+      estimatedDeliveryDays: 14,
+      description: 'Unleash your dark side with the Demon Claw Y2K Watch, a bold and artistic statement piece that blends gothic edge with Y2K flair. Featuring a black dial encased in metallic claw-like detailing and paired with an intricately sculpted bracelet, this watch is a true standout. Designed for lovers of fantasy, metal aesthetics, or unique streetwear, it’s both decorative and functional with a luminous display and quartz movement. The small date window adds a practical touch to its fiery style.', 
+      excludedCountries: ["US",],
+    },
+    {
+      id: 11,
+      name: 'Unisex Palm Print Bucket Hat – Summer Sun Protection Hat',
+      price: 11.99,
+      images: ['https://ae-pic-a1.aliexpress-media.com/kf/S4ab31e3322124c3a8b706e06796c7b32M.jpg_960x960q75.jpg_.avif'],
+      category: ['bestsellers', 'accessories',],
+      estimatedDeliveryDays: 14,
+      description: 'Unleash your dark side with the Demon Claw Y2K Watch, a bold and artistic statement piece that blends gothic edge with Y2K flair. Featuring a black dial encased in metallic claw-like detailing and paired with an intricately sculpted bracelet, this watch is a true standout. Designed for lovers of fantasy, metal aesthetics, or unique streetwear, it’s both decorative and functional with a luminous display and quartz movement. The small date window adds a practical touch to its fiery style.', 
+      excludedCountries: ["US",],
+      extraShippingCost: {
+          MX: 9,
+      }
+    },
   
   // 🔁 Añade todos los demás productos aquí con sus categorías
 ];

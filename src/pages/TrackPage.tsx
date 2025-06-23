@@ -52,7 +52,7 @@ const TrackPage = () => {
           <div className="space-y-6">
             {orders.map((item) => (
               <div
-                key={item.id}
+                key={`${item.id}-${item.addedAt}`}
                 className="flex items-center gap-6 border border-gray-800 p-4 rounded-lg"
               >
                 <img

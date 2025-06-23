@@ -15,7 +15,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
   const categories = [
     { label: 'All Products', slug: 'all' },
-    { label: 'Decoration', slug: 'decoration' },   
+    { label: 'Decoration', slug: 'decoration' },
+    { label: 'Accessories', slug: 'accessories' },   
   ];
 
   useEffect(() => {
