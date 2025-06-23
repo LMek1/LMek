@@ -1,74 +1,95 @@
-import React from 'react';
+import { useCart } from '../CartContext';
+import { Product } from '../data/products';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../CartContext'; // Asegúrate de la ruta correcta
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  images: string;
-  isRunningOut?: boolean;
-}
+import { useState, useEffect } from 'react';
 
 interface ProductCardProps {
   product: Product;
 }
 
+export default function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+  const [added, setAdded] = useState(false);
+  const [countryCode, setCountryCode] = useState<string | null>(null);
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const [added, setAdded] = React.useState(false);
-  const { addToCart } = useCart();  
+  useEffect(() => {
+    const override = localStorage.getItem('devCountryOverride');
+    if (override) {
+      setCountryCode(override.toUpperCase());
+    } else {
+      fetch('https://get.geojs.io/v1/ip/country.json')
+        .then(res => res.json())
+        .then(data => setCountryCode((data.country || 'US').toUpperCase()))
+        .catch(() => setCountryCode('US'));
+    }
+  }, []);
+
+  const isLoading = countryCode === null;
+  const isBlocked = countryCode
+    ? product.excludedCountries?.includes(countryCode) || false
+    : false;
+
   return (
-    <Link to={`/product/${product.id}`} className="block">
-      <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden group hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-300 hover:-translate-y-1">
-        <div className="relative overflow-hidden">
-          <img
-            src={product.images}
-            alt={product.name}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          {product.isRunningOut && (
-            <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-              Running Out
-            </div>
-          )}
-        </div>
-        
-        <div className="p-4">
-          <h3 className="text-white font-semibold mb-2 group-hover:text-green-400 transition-colors">
+    <div className="bg-gray-900 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between">
+      <Link to={`/product/${product.id}`}>
+        <img
+          src={product.images}
+          alt={product.name}
+          className="w-full h-72 object-cover rounded-t-2xl"
+        />
+      </Link>
+
+      <div className="p-4 flex flex-col gap-3">
+        <Link to={`/product/${product.id}`}>
+          <h3 className="text-white font-semibold hover:text-green-400 transition-colors text-lg">
             {product.name}
           </h3>
-          
-          <div className="flex items-center justify-between">
-            <span className="text-xl font-bold text-green-400">
-              ${product.price}
-            </span>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  addToCart(product);
-                  setAdded(true);
-                  setTimeout(() => setAdded(false), 1200); // vuelve al normal en 1.2s
-                }}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 ${
-                  added
-                    ? 'bg-green-600 hover:bg-green-700 text-white'
-                    : 'bg-blue-600 hover:bg-blue-700 text-white'
-                }`}
+        </Link>
 
-              >
-                <ShoppingCart className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  {added ? 'Added!' : 'Add to Cart'}
-                </span>
-              </button>
-          </div>
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-bold text-green-400">
+            ${product.price.toFixed(2)}
+          </span>
+
+          <button
+            type="button"
+            disabled={isBlocked || isLoading}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (isBlocked || isLoading || !countryCode) return;
+
+              const extra = product.extraShippingCost?.[countryCode] || 0;
+              const adjustedProduct = {
+                ...product,
+                price: product.price + extra,
+              };
+
+              addToCart(adjustedProduct);
+              setAdded(true);
+              setTimeout(() => setAdded(false), 1200);
+            }}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all text-sm font-medium
+              ${
+                isBlocked || isLoading
+                  ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                  : added
+                  ? 'bg-green-600 hover:bg-green-700 text-white'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
+          >
+            <ShoppingCart className="w-4 h-4" />
+            {isBlocked
+              ? 'Unavailable'
+              : isLoading
+              ? 'Checking...'
+              : added
+              ? 'Added!'
+              : 'Add to Cart'}
+          </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
-};
-
-export default ProductCard;
+}

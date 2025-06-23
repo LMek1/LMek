@@ -8,7 +8,7 @@ export default function CategoryPage() {
   const filtered =
     category === 'all'
       ? products
-      : products.filter(p => p.category === category);
+      : products.filter(p => p.category.includes(category));
 
   return (
     <div className="flex flex-col min-h-[70vh]">

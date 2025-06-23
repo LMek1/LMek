@@ -16,8 +16,9 @@ function App({ searchQuery }: { searchQuery: string }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const featuredProducts = products.filter(p => p.category === 'new' || p.category === 'bestsellers');
-
+  const featuredProducts = products.filter(p =>
+    p.category.includes('new') || p.category.includes('bestsellers')
+  );
   const runningOutProducts = products.filter(p => p.category === 'limited');
   
   return (

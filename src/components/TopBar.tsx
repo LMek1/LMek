@@ -37,7 +37,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
   }, []);
 
   return (
-    <header className="bg-gray-950 border-b border-gray-800 p-4">
+    <header className="bg-gray-950 border-b border-blue-700 p-4">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         {/* Línea superior: botón + buscador */}
         <div className="flex items-center gap-3">
@@ -56,14 +56,14 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Search products..."
-                className="w-full bg-gray-950 border border-gray-800 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="w-full bg-gray-950 border border-blue-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
               />
             </div>
           </form>
         </div>
 
         {/* Mensaje motivacional */}
-        <div className="text-gray-300 text-sm md:text-xl font-semibold text-center md:text-left">
+        <div className="text-green-300 text-sm md:text-xl font-semibold text-center md:text-left">
           {randomPhrase}
         </div>
       </div>

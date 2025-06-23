@@ -42,7 +42,7 @@ const CartPage = () => {
                 <tr className="border-b border-gray-700 text-gray-400 text-sm uppercase">
                   <th className="p-4">Image</th>
                   <th>Product</th>
-                  <th>Price</th>
+                  <th>Price (+Shipping Cost)</th>
                   <th>Quantity</th>
                   <th>Total</th>
                   <th></th>
