@@ -16,7 +16,7 @@ const FAQsPage = () => {
 
         <div className="mb-4">
             <h2 className="text-xl font-semibold text-green-400">Do you ship internationally?</h2>
-            <p className="text-gray-300">Yes! We ship to most countries including the US, UK, EU, and Latin America.</p>
+            <p className="text-gray-300">We ship to the US, ES, MX, and FR.</p>
         </div>
         </main>
     </div>
