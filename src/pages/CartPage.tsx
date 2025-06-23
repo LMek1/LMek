@@ -93,7 +93,7 @@ const CartPage = () => {
               Total: ${total.toFixed(2)}
             </p>
             <p className="text-gray-400 text-sm mb-2">
-              Your payment is processed securely with <span className="font-semibold text-white">Stripe</span>. We do not store your card information.
+              Your payment is processed securely with <span className="font-semibold text-white">Stripe</span>. We do not store your card information. (It may take a few seconds to process your payment.)
             </p>
             <button
               onClick={handleCheckout}
