@@ -53,8 +53,7 @@ app.post('/create-checkout-session', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Error creating checkout session' });
   }
 });
-
-app.post('/verify-checkout', async (req, res) => {
+app.post('/verify-checkout', async (req: Request, res: Response) => {
   const { session_id } = req.body;
 
   try {
